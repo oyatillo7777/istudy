@@ -21,7 +21,6 @@ class ListTitleWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.red,
         boxShadow: const [
         ]
       ),
@@ -52,11 +51,13 @@ class ListTitleWidget extends StatelessWidget {
                   txt: txtTitle,
                   size: 13.sp,
                   txtColor:color?? Colors.white,
+                  elips: true,
                 ),
                 TextWidget(
                   txt: txtPlace,
                   size: 13.sp,
                   txtColor: Colors.grey,
+                  elips: true,
                 ),
               ],
             ),

@@ -73,7 +73,7 @@ class MobileInput extends StatelessWidget {
         onChanged: onChanged,
         onTap: onTap,
         style: TextStyle(
-          color: AppColors.whiteColor,
+          color: Colors.black,
           fontSize: 14.sp,
           fontFamily: 'Open Sans',
           fontWeight: FontWeight.w400,

@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:istudy/screens/home/cubit/category_cubit.dart';
 import 'package:istudy/screens/home/widgets/listTitle.dart';
 import 'package:istudy/tools/colors.dart';
 import 'package:istudy/widgets/sized_box.dart';
@@ -26,6 +29,14 @@ class _HomePageState extends State<HomePage> {
     "Najot ta'lim",
     "iTeach",
   ];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<CategoryCubit>().getCategory();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +71,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Hg(height: 39,),
+            const Hg(
+              height: 39,
+            ),
             TextWidget(
               txt: "Salom, Xabibulloh",
               txtColor: Colors.black,
@@ -72,7 +85,9 @@ class _HomePageState extends State<HomePage> {
               txtColor: Colors.grey,
               size: 13.sp,
             ),
-            const Hg(height: 18,),
+            const Hg(
+              height: 18,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -104,8 +119,10 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            Wd(),
-                            SvgPicture.asset('assets/study.svg',)
+                            const Wd(),
+                            SvgPicture.asset(
+                              'assets/study.svg',
+                            )
                           ],
                         ),
                       ),
@@ -132,23 +149,37 @@ class _HomePageState extends State<HomePage> {
                         const Hg(
                           height: 17,
                         ),
-                        Container(
-                          height: 196,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: ListTitleWidget(
-                                  img: 'assets/person.jpg',
-                                  txtTitle: 'Codium',
-                                  txtPlace: "Farg'ona",
+                        BlocBuilder<CategoryCubit, CategoryState>(
+                          builder: (context, state) {
+                            if(state is CategoryLoadingState){
+                              return const Center(child: CircularProgressIndicator.adaptive(),);
+                            }else if(state is CategorySuccessState){
+                              return SizedBox(
+                                height: 196,
+                                child: ListView.builder(
+                                  itemCount: state.data.data!.values?.length,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    var dataa = state.data.data?.values?[index];
+                                    return  Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                      child: ListTitleWidget(
+                                        img: 'assets/person.jpg',
+                                        txtTitle: dataa?.name ?? "Null this is ",
+                                        txtPlace: dataa?.description??"Farg'ona",
+                                      ),
+                                    );
+                                  },
                                 ),
                               );
-                            },
-                          ),
-                        ),
+                            }else if(state is CategoryErrorState){
+                              return TextWidget(txt: state.error);
+                            }else {
+                              return const SizedBox();
+                            }
+                          },
+                        )
                       ],
                     ),
                     const Hg(
@@ -173,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                         const Hg(
                           height: 17,
                         ),
-                        Container(
+                        SizedBox(
                           height: 146,
                           child: ListView.builder(
                             itemCount: 3,

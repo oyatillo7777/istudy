@@ -44,6 +44,8 @@ dependencies:
   svg_icon: ^0.0.1
   flutter_svg: ^0.22.0
   flutter_screenutil: ^5.9.0
+  dartz: ^0.10.1
+
 
 
 
