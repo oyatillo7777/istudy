@@ -17,8 +17,8 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
   List page = [
     const HomePage(),
-    const StaisticScreen(),
-    const ChekScreen(),
+    const ChekScreen(),    const StaticticScreen(),
+
     const ProfileScreen(),
   ];
 

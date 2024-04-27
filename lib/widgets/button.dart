@@ -82,7 +82,7 @@ class MobileButton extends StatelessWidget {
                   fontWeight: labelFontWight ?? FontWeight.w600,
                   size: fontSize ?? 14,
                   elips: true,
-                  txtColor: labelColor ?? Colors.white,
+                  txtColor: labelColor ?? AppColors.primaryColor,
                   maxLines: 1,
                 ),
               )

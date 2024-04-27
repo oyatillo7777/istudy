@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               size: 22.sp,
             ),
             TextWidget(
-              txt: "Bajarilmagan uyga vazifalar",
+              txt: "",
               txtColor: Colors.grey,
               size: 13.sp,
             ),
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextWidget(
-                                  txt: "Uyga vazifa mavjud ",
+                                  txt: "Test mavjud ",
                                   txtColor: Colors.white,
                                 ),
                                 TextWidget(

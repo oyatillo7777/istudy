@@ -4,8 +4,8 @@ import 'package:istudy/tools/colors.dart';
 import 'package:istudy/widgets/sized_box.dart';
 import 'package:istudy/widgets/text_widget.dart';
 
-class ChekScreen extends StatelessWidget {
-  const ChekScreen({super.key});
+class StaticticScreen extends StatelessWidget {
+  const StaticticScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
