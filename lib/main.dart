@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:istudy/screens/home/cubit/category_cubit.dart';
+import 'package:istudy/screens/home/cubit/category/category_cubit.dart';
+import 'package:istudy/screens/home/cubit/education/education_cubit.dart';
 import 'package:istudy/screens/splash/splash.dart';
+import 'package:istudy/screens/statistic/cubit/student_cubit.dart';
 import 'package:istudy/tools/responsive.dart';
 
 // DioRequestInspector dioRequestInspector = DioRequestInspector(
@@ -16,7 +18,13 @@ void main() {
       providers: [
         BlocProvider(
           create: (_) => CategoryCubit(),
-        )
+        ),
+        BlocProvider(
+          create: (_) => EducationCubit(),
+        ),
+        BlocProvider(
+          create: (_) => StudentCubit(),
+        ),
       ],
       child: MyApp(),
     ),

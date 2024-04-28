@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:istudy/screens/home/cubit/category_cubit.dart';
+import 'package:istudy/screens/home/cubit/category/category_cubit.dart';
+import 'package:istudy/screens/home/cubit/education/education_cubit.dart';
 import 'package:istudy/screens/home/widgets/listTitle.dart';
 import 'package:istudy/tools/colors.dart';
 import 'package:istudy/widgets/sized_box.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<CategoryCubit>().getCategory();
+      context.read<EducationCubit>().getEducation();
     });
     super.initState();
   }
@@ -113,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                   txtColor: Colors.white,
                                 ),
                                 TextWidget(
-                                  txt: "15:00 - 18:00",
+                                  txt: "04.07.2024",
                                   size: 12,
                                   txtColor: Colors.white,
                                 ),
@@ -130,31 +132,34 @@ class _HomePageState extends State<HomePage> {
                     const Hg(
                       height: 30,
                     ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextWidget(
-                              txt: "Kompaniyalar",
-                              size: 13.sp,
-                            ),
-                            TextWidget(
-                              txt: "Hammasi",
-                              size: 13.sp,
-                              txtColor: AppColors.primaryColor,
-                            ),
-                          ],
-                        ),
-                        const Hg(
-                          height: 17,
-                        ),
-                        BlocBuilder<CategoryCubit, CategoryState>(
-                          builder: (context, state) {
-                            if(state is CategoryLoadingState){
-                              return const Center(child: CircularProgressIndicator.adaptive(),);
-                            }else if(state is CategorySuccessState){
-                              return SizedBox(
+                    BlocBuilder<CategoryCubit, CategoryState>(
+                      builder: (context, state) {
+                        if (state is CategoryLoadingState) {
+                          return const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                        } else if (state is CategorySuccessState) {
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextWidget(
+                                    txt: "Kompaniyalar",
+                                    size: 13.sp,
+                                  ),
+                                  TextWidget(
+                                    txt: "Hammasi",
+                                    size: 13.sp,
+                                    txtColor: AppColors.primaryColor,
+                                  ),
+                                ],
+                              ),
+                              const Hg(
+                                height: 17,
+                              ),
+                              SizedBox(
                                 height: 196,
                                 child: ListView.builder(
                                   itemCount: state.data.data!.values?.length,
@@ -162,71 +167,90 @@ class _HomePageState extends State<HomePage> {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
                                     var dataa = state.data.data?.values?[index];
-                                    return  Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
                                       child: ListTitleWidget(
                                         img: 'assets/person.jpg',
-                                        txtTitle: dataa?.name ?? "Null this is ",
-                                        txtPlace: dataa?.description??"Farg'ona",
+                                        txtTitle:
+                                            dataa?.name ?? "Null this is ",
+                                        txtPlace:
+                                            dataa?.description ?? "Farg'ona",
                                       ),
                                     );
                                   },
                                 ),
-                              );
-                            }else if(state is CategoryErrorState){
-                              return TextWidget(txt: state.error);
-                            }else {
-                              return const SizedBox();
-                            }
-                          },
-                        )
-                      ],
+                              ),
+                            ],
+                          );
+                        } else if (state is CategoryErrorState) {
+                          return TextWidget(txt: state.error);
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
                     ),
                     const Hg(
                       height: 30,
                     ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextWidget(
-                              txt: "O‘quv markazlari",
-                              size: 13.sp,
-                            ),
-                            TextWidget(
-                              txt: "Hammasi",
-                              size: 13.sp,
-                              txtColor: AppColors.primaryColor,
-                            ),
-                          ],
-                        ),
-                        const Hg(
-                          height: 17,
-                        ),
-                        SizedBox(
-                          height: 146,
-                          child: ListView.builder(
-                            itemCount: 3,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: ListTitleWidget(
-                                  img: img[index],
-                                  txtTitle: txt[index],
-                                  txtPlace: "Farg'ona",
-                                  color:
-                                      index == 0 ? Colors.grey : Colors.white,
+                    BlocBuilder<EducationCubit, EducationState>(
+                      builder: (context, state) {
+                        if (state is EducationLoadingState) {
+                          return SizedBox();
+                        } else if (state is EducationSuccessState) {
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextWidget(
+                                    txt: "O‘quv markazlari",
+                                    size: 13.sp,
+                                  ),
+                                  TextWidget(
+                                    txt: "Hammasi",
+                                    size: 13.sp,
+                                    txtColor: AppColors.primaryColor,
+                                  ),
+                                ],
+                              ),
+                              const Hg(
+                                height: 17,
+                              ),
+                              SizedBox(
+                                height: 146,
+                                child: ListView.builder(
+                                  itemCount: state.data.values.length,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    var data = state.data.values[index];
+
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: ListTitleWidget(
+                                        img: img[index],
+                                        txtTitle: data.name ?? '',
+                                        txtPlace: data.description ?? '',
+                                        color: index == 0
+                                            ? Colors.grey
+                                            : Colors.white,
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                              ),
+                            ],
+                          );
+                        } else if (state is EducationErrorState) {
+                          return TextWidget(txt: state.error);
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    )
                   ],
                 ),
               ),

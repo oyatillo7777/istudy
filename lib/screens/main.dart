@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:istudy/screens/chek/chek.dart';
+import 'package:istudy/screens/cheks/chek.dart';
 import 'package:istudy/screens/home/home.dart';
 import 'package:istudy/screens/profile/profile.dart';
-import 'package:istudy/screens/statistic/staistic.dart';
+import 'package:istudy/screens/statistic/statistic.dart';
 import 'package:istudy/tools/colors.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,8 +17,8 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
   List page = [
     const HomePage(),
-    const ChekScreen(),    const StaticticScreen(),
-
+    const ChekScreen(),
+    const StaticticScreen(),
     const ProfileScreen(),
   ];
 

@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:istudy/service/category/category.dart';
 import 'package:meta/meta.dart';
 
-import '../../../model/category/categoryModel.dart';
+import '../../../../model/category/categoryModel.dart';
 
 part 'category_state.dart';
 

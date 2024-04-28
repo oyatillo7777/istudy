@@ -105,14 +105,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         CardWidget(
                           title: 'Eng yuqori ball',
-                          son: '94',
+                          son: '97',
                         ),
                         Wd(
                           width: 21,
                         ),
                         CardWidget(
                           title: 'Eng past ball',
-                          son: '62',
+                          son: '50',
                           color: Color(0xffFFB55C),
                         ),
                       ],
